@@ -19,3 +19,12 @@ Route::get('/', [PublicController::class, 'home'])->name('home');
 // creazione della rotta per la  visualizzazione del form
 Route::get('/games/create',[GameController::class,'create'])->name('game.create');
 Route::post('/games/store',[GameController::class,'store'])->name('game.store');
+// rotta visualizzazione rotta
+Route::get('/games',[GameController::class,'index'])->name('game.index');
+Route::get('/game/{game}',[GameController::class,'show'])->name('game.show');
+
+// Rotte per la modifica
+Route::get('/game/edit/{game}',[GameController::class,'edit'])->name('game.edit');
+Route::put('/game/update/{game}',[GameController::class,'update'])->name('game.update');
+
+Route::delete('/game/delete/{game}',[GameController::class,'destroy'])->name('game.destroy');

@@ -10,18 +10,22 @@
                     <p>{{ session("success") }}</p>
                 </div>
                 @endif
-                <form method="POST" action="{{ route('game.store')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('game.update',compact('game'))}}" enctype="multipart/form-data">
+                    
                     @csrf
+                    @method('put')
+                   
+            
                     <div class="mb-3">
                       <label for="title" class="form-label">Title</label>
-                      <input name="title" type="text" class="form-control  @error('title') is-invalid @enderror" id="title" value="{{old('title')}}">
+                      <input name="title" type="text" class="form-control  @error('title') is-invalid @enderror" id="title" value="{{$game->title}}">
                       @error('title')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror
                      </div>
                      <div class="mb-3">
                         <label for="price" class="form-label  @error('price') is-invalid @enderror">Price</label>
-                        <input name="price" type="text" class="form-control" id="price" value="{{old('price')}}">
+                        <input name="price" type="text" class="form-control" id="price" value="{{$game->price}}">
                         @error('price')
                         <p class="text-danger">{{ $message }}</p>
                       @enderror
@@ -29,7 +33,7 @@
                     
                     <div class="mb-3">
                         <label for="description" class="form-label  @error('description') is-invalid @enderror">Description</label>
-                      <textarea name="description" id="description" class="form-control  @error('description') is-invalid @enderror" cols="30" >{{old('description')}}</textarea>
+                      <textarea name="description" id="description" class="form-control  @error('description') is-invalid @enderror" cols="30" >{{$game->decription}}</textarea>
                       @error('description')
                       <p class="text-danger">{{ $message }}</p>
                       @enderror

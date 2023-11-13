@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use Illuminate\Http\Request;
+use App\Http\Requests\GameStoreRequest;
 
 class GameController extends Controller
 {
@@ -12,6 +13,8 @@ class GameController extends Controller
      */
     public function index()
     {
+        $games = Game::all();
+        return view('game.index',compact('games'));
         //
     }
 
@@ -26,12 +29,12 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(GameStoreRequest $request)
     {
         $file = $request->file('img');
       Game::create([
         "title" => $request->title,
-        "description" => $request->decsription,
+        "description" => $request->description,
         "price" => $request->price,
         "img" => $file ? $file->store('public/images') : "public/images/default.png" 
       ]);
@@ -43,7 +46,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        //
+        return view('game.show',compact('game'));//
     }
 
     /**
@@ -51,22 +54,30 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        //
+       return view('game.edit',compact('game'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Game $game)
+    public function update(GameStoreRequest $request, Game $game)
     {
-        //
+        $file = $request->file('img');
+        $game->update([
+            "title" => $request->title,
+            "description"=> $request->description,
+            "price" => $request->price,
+            "img" => $file ? $file->store("public/images") : $game->img
+        ]);
+    
+     return redirect()->route("game.edit",compact('game'))->with('success','Il gioco è stato aggiornato coretamente!');
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Game $game)
     {
-        //
+        $game->delete();
+        return redirect()->route("game.index")->with("succes","Ilgioco è stato eliminato con successo!");
     }
 }
