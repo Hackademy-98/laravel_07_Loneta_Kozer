@@ -19,8 +19,8 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ $game->title }}</h5>
                       <p class="card-text">{{ $game->price }}</p>
-                      <a href=""{{ route('game.show', compact('game')) }} class="btn btn-primary">Go somewhere</a>
-                      <a href=""{{ route('game.edit', compact('game')) }} class="btn btn-warning">Go somewhere</a>
+                      <a href="{{ route('game.show', compact('game')) }}" class="btn btn-primary">Detaglio</a>
+                      <a href="{{ route('game.edit', compact('game')) }}" class="btn btn-warning">Modifica</a>
                     <form action="{{route('game.destroy',compact('game'))}}" method="post">
                         @csrf
                         @method('delete')

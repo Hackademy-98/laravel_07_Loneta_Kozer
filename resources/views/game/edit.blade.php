@@ -10,11 +10,11 @@
                     <p>{{ session("success") }}</p>
                 </div>
                 @endif
-                <form method="POST" action="{{ route('game.update',compact('game'))}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route('game.update',compact('game'))}}" enctype="multipart/form-data">
                     
                     @csrf
+                    
                     @method('put')
-                   
             
                     <div class="mb-3">
                       <label for="title" class="form-label">Title</label>

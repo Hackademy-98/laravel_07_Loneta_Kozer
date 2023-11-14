@@ -15,25 +15,37 @@
         <li>
             <a class="nav-link" href="#">Contatti</a>
           </li>
-          <li>
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          {{-- <li class="nav-item dropdown">
+        
+          @auth
+              <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+              {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="{{ route('game.create') }}">Crea gioco</a></li>
+              
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
+              <li>
+                <form action="{{ route('logout') }}" method="post">
+                  @csrf
+                  <button class="btn btn-primary">Logout</button>
+                </form>
+
+              </li>
             </ul>
-          </li> --}}
+          </li>
 
         </ul>
-        <div>
-            <a class="btn btn-info" href="">Crea giochi</a>
-        </div>
+      
+        @else
+        <a class="nav-link px-3 " href="{{route('register')}}">Register</a>
+        <a class="nav-link px-3 " href="{{route('login')}}">Login</a>
+        @endauth
+      
+      
      </div>
     </div>
   </nav>

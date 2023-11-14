@@ -26,5 +26,7 @@ Route::get('/game/{game}',[GameController::class,'show'])->name('game.show');
 // Rotte per la modifica
 Route::get('/game/edit/{game}',[GameController::class,'edit'])->name('game.edit');
 Route::put('/game/update/{game}',[GameController::class,'update'])->name('game.update');
-
+// rotta per la cancellazione
 Route::delete('/game/delete/{game}',[GameController::class,'destroy'])->name('game.destroy');
+
+
