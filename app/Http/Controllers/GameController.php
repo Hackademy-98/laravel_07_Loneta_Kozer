@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use Illuminate\Http\Request;
 use App\Http\Requests\GameStoreRequest;
+use App\Models\Category;
 
 class GameController extends Controller
 {
+    public function __construct(){
+        $this->middleware("auth")->except('index');
+    }
     /**
-     * Display a listing of the resource.
+     *  Display a listing of the resource.
      */
     public function index()
     {
@@ -23,7 +27,8 @@ class GameController extends Controller
      */
     public function create()
     {
-        return view('game.create');
+        $categories = Category::all();
+        return view('game.create',compact('categories'));
     }
 
     /**
@@ -36,6 +41,7 @@ class GameController extends Controller
         "title" => $request->title,
         "description" => $request->description,
         "price" => $request->price,
+        "category_id" => $request->category,
         "img" => $file ? $file->store('public/images') : "public/images/default.png" 
       ]);
       return redirect()->route('game.create')->with('success','Gioco creato con successo!');
@@ -67,7 +73,7 @@ class GameController extends Controller
             "title" => $request->title,
             "description"=> $request->description,
             "price" => $request->price,
-            "img" => $file ? $file->store("public/images") : $game->img
+             "img" => $file ? $file->store("public/images") : $game->img
         ]);
     
      return redirect()->route("game.edit",compact('game'))->with('success','Il gioco è stato aggiornato coretamente!');
@@ -78,6 +84,10 @@ class GameController extends Controller
     public function destroy(Game $game)
     {
         $game->delete();
-        return redirect()->route("game.index")->with("succes","Ilgioco è stato eliminato con successo!");
+        return redirect()->route("game.index")->with("succes","Il gioco è stato eliminato con successo!");
+    }
+    // filtra i giochi in base ad una categoria selezionata
+    public function filterByCategory(Category $category){
+        return view('game.filterByCategory',compact('category'));
     }
 }

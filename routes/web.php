@@ -28,5 +28,5 @@ Route::get('/game/edit/{game}',[GameController::class,'edit'])->name('game.edit'
 Route::put('/game/update/{game}',[GameController::class,'update'])->name('game.update');
 // rotta per la cancellazione
 Route::delete('/game/delete/{game}',[GameController::class,'destroy'])->name('game.destroy');
-
-
+// filtrare con la categoria 1-N
+Route::get('/games/category/{category}',[GameController::class,'filterByCategory'])->name('game.filterByCategory');

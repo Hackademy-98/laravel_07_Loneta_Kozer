@@ -20,8 +20,18 @@
                       @enderror
                      </div>
                      <div class="mb-3">
-                        <label for="price" class="form-label  @error('price') is-invalid @enderror">Price</label>
-                        <input name="price" type="text" class="form-control" id="price" value="{{old('price')}}">
+                        <label for="category" class="form-label  @error('category') is-invalid @enderror">Category</label>
+                        <select class="form-select" id="category" name="category">
+                            <option selected>Select category</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                         </div>
+                         <div class="mb-3">
+
+                            <label for="price" class="form-label  @error('price') is-invalid @enderror">Price</label>
+                      <input name="price" type="text" class="form-control" id="price" value="{{old('price')}}">
                         @error('price')
                         <p class="text-danger">{{ $message }}</p>
                       @enderror
