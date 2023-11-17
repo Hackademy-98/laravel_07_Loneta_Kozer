@@ -27,7 +27,26 @@
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
-                         </div>
+                    </div>
+
+
+                        
+                    
+                    <div class="row px-4 my-4">
+                        <div class="col-12">
+                            <h3>Consoles</h3>
+                        </div>
+                        @foreach($consoles as $console)
+                         <div class="col-6  col-md-3 col-lg-4 form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ $console->id}}" id="flexCheckDefault" name="console[]">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              {{ $console->name }}
+                            </label>
+                          </div>
+                         @endforeach
+                        </div>
+                      
+
                          <div class="mb-3">
 
                             <label for="price" class="form-label  @error('price') is-invalid @enderror">Price</label>
